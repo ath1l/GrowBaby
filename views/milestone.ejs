@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestones for <%= babyName %></title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #4a4a4a;
+            font-weight: bold;
+        }
+        h1 {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .milestone-form-container {
+            background-color: #f8f9fa;
+            border: 1px solid #e2e2e2;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        .milestone-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .milestone-form input, .milestone-form textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .milestone-form input:focus, .milestone-form textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0,123,255,0.25);
+            outline: none;
+        }
+        .milestone-form textarea {
+            resize: vertical;
+        }
+        .milestone-form button {
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .milestone-form button:hover {
+            background-color: #218838;
+        }
+        .milestone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            justify-content: center;
+        }
+        .sticky-note {
+            background-color: #fff9c4; /* Light yellow sticky note color */
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1), -5px -5px 15px rgba(255,255,255,0.5);
+            border-radius: 8px;
+            text-align: left;
+            position: relative;
+            transition: transform 0.3s ease;
+            transform: rotate(<%= Math.random() * 4 - 2 %>deg); /* Random slight rotation */
+        }
+        .sticky-note:hover {
+            transform: scale(1.05) rotate(0deg);
+            z-index: 10;
+        }
+        .sticky-note h3 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: #333;
+            font-weight: bold;
+        }
+        .sticky-note p {
+            margin: 0;
+            color: #555;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+        .sticky-note .date {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #777;
+            text-align: right;
+            font-style: italic;
+        }
+        .no-milestones {
+            text-align: center;
+            color: #888;
+            font-size: 1.2em;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Milestones for <%= babyName %></h1>
+
+        <div class="milestone-form-container">
+            <h2>Add New Milestone</h2>
+            <form action="/milestone" method="POST" class="milestone-form">
+                <input type="text" name="title" placeholder="Milestone Title (e.g., First Steps)" required>
+                <textarea name="description" placeholder="Description (e.g., Took their first steps towards the dog!)" rows="3" required></textarea>
+                <button type="submit">Record Milestone</button>
+            </form>
+        </div>
+
+        <h2>Recorded Milestones</h2>
+        <% if (milestones.length > 0) { %>
+            <div class="milestone-grid">
+                <% milestones.forEach(m => { %>
+                    <div class="sticky-note">
+                        <h3><%= m.title %></h3>
+                        <p><%= m.description %></p>
+                        <p class="date"><%= m.date.toLocaleDateString() %></p>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <div class="no-milestones">
+                <p>No milestones have been recorded yet. Add one above!</p>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
