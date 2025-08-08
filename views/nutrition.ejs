@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Baby Nutrition Analysis</title>
+    <link rel="stylesheet" href="/css/nutrition.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Nutrition Analysis for Your Baby</h1>
+
+        <form action="/nutrition" method="POST" class="food-form">
+            <label for="food">Enter the food given to your baby:</label>
+            <input type="text" id="food" name="food" placeholder="e.g., mashed banana" required>
+            <button type="submit">Analyze</button>
+        </form>
+
+        <% if (result && !result.error) { %>
+            <div class="result">
+                <h2>Nutrition Breakdown</h2>
+                <table>
+                    <tr><th>Calories</th><td><%= result.calories %></td></tr>
+                    <tr><th>Protein</th><td><%= result.protein %></td></tr>
+                    <tr><th>Carbohydrates</th><td><%= result.carbohydrates %></td></tr>
+                    <tr><th>Fats</th><td><%= result.fats %></td></tr>
+                    <tr>
+                        <th>Vitamins</th>
+                        <td>
+                            <ul>
+                                <% result.vitamins.forEach(v => { %>
+                                    <li><%= v %></li>
+                                <% }) %>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Minerals</th>
+                        <td>
+                            <ul>
+                                <% result.minerals.forEach(m => { %>
+                                    <li><%= m %></li>
+                                <% }) %>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="advice">
+                    <h3>Parenting Advice</h3>
+                    <p><%= result.advice %></p>
+                </div>
+            </div>
+        <% } else if (result && result.error) { %>
+            <p class="error"><%= result.error %></p>
+        <% } %>
+    </div>
+</body>
+</html>
