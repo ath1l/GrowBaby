@@ -6,6 +6,8 @@ const Baby = require('./models/Baby');
 const checkBabyProfile = require('./middleware/checkBabyProfile');
 const indexRoutes = require('./routes/index');
 const chatBotRoutes = require('./routes/chatBot'); // ✅ Import chatbot routes
+require('dotenv').config(); 
+
 
 mongoose.connect('mongodb://localhost:27017/growbabyDB')
 .then(() => {
@@ -15,6 +17,15 @@ mongoose.connect('mongodb://localhost:27017/growbabyDB')
     console.log("Mongo Error");
     console.log(err);
 });
+
+// mongoose.connect(process.env.MONGO_URI) // 
+// .then(() => {
+//     console.log("Mongo Connection open");
+// })
+// .catch(err => {
+//     console.log("Mongo Error", err);
+// });
+
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
