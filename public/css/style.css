@@ -1,0 +1,27 @@
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    min-height: 100vh;
+}
+
+.card {
+    border-radius: 20px;
+}
+
+.btn-custom {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+}
+
+/* Age bar style */
+.age-bar {
+    height: 25px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.age-bar .progress-bar {
+    border-radius: 12px;
+    transition: width 0.5s ease;
+}

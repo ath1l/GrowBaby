@@ -6,7 +6,7 @@ const Baby = require('./models/Baby');
 const checkBabyProfile = require('./middleware/checkBabyProfile');
 const indexRoutes = require('./routes/index');
 const chatBotRoutes = require('./routes/chatBot'); // ✅ Import chatbot routes
-require('dotenv').config(); 
+
 
 
 mongoose.connect('mongodb://localhost:27017/growbabyDB')
@@ -30,6 +30,8 @@ mongoose.connect('mongodb://localhost:27017/growbabyDB')
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Apply checkBabyProfile to all routes
 app.use(checkBabyProfile);
