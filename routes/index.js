@@ -36,4 +36,29 @@ router.post('/profile', async (req, res) => {
     res.redirect('/');
 });
 
+// Edit profile form
+router.get('/profile/edit', async (req, res) => {
+    const baby = await Baby.findOne(); // You might filter for logged-in user
+    if (!baby) {
+        return res.redirect('/profile'); // If no profile exists, go create one
+    }
+    res.render('editProfileForm', { baby });
+});
+
+// Handle edit profile submission
+router.post('/profile/edit', async (req, res) => {
+    const { name, dob, gender } = req.body;
+    const baby = await Baby.findOne();
+    if (!baby) {
+        return res.redirect('/profile');
+    }
+
+    baby.name = name;
+    baby.dob = dob;
+    baby.gender = gender;
+    await baby.save();
+
+    res.redirect('/');
+});
+
 module.exports = router;
