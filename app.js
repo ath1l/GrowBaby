@@ -7,6 +7,7 @@ const checkBabyProfile = require('./middleware/checkBabyProfile');
 const indexRoutes = require('./routes/index');
 const chatBotRoutes = require('./routes/chatBot');
 const nutritionRoutes = require('./routes/nutrition');
+const resourcesRoutes = require('./routes/resources');
 require('dotenv').config(); 
 
 
@@ -42,6 +43,8 @@ app.use('/', indexRoutes);
 app.use('/chatbot', chatBotRoutes); // ✅ Mount chatbot routes under /chatbot 
 
 app.use('/',nutritionRoutes);
+
+app.use('/',resourcesRoutes);
 
 app.listen(3000, () => {
     console.log("Serving on port 3000")

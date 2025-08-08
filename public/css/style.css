@@ -25,3 +25,7 @@ body {
     border-radius: 12px;
     transition: width 0.5s ease;
 }
+
+.card iframe {
+  border-radius: 6px;
+}

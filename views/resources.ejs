@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Parenting Resources</title>
+  <link rel="stylesheet" href="/css/resources.css">
+  <style>
+    /* Optional: Responsive YouTube embed */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Resources for Parents of a <%= ageMonths %>-Month-Old Baby</h1>
+
+    <section>
+      <h2>📺 Recommended Videos</h2>
+      <div class="cards">
+        <% resources.videos.forEach(video => { 
+             const match = video.link.match(/(?:v=|youtu\.be\/)([^&\n?#]+)/);
+             const videoId = match ? match[1] : null;
+        %>
+          <div class="card">
+            <h3><%= video.title %></h3>
+            <p><%= video.description %></p>
+
+            <% if (videoId) { %>
+              <div class="video-container">
+                <iframe 
+                  src="https://www.youtube.com/embed/<%= videoId %>" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            <% } else { %>
+              <a href="<%= video.link %>" target="_blank">Watch Video</a>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+
+    <section>
+      <h2>📚 Recommended Articles</h2>
+      <div class="cards">
+        <% resources.articles.forEach(article => { %>
+          <div class="card">
+            <h3><%= article.title %></h3>
+            <p><%= article.description %></p>
+            <a href="<%= article.link %>" target="_blank">Read Article</a>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
