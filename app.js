@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const Baby = require('./models/Baby');
 const checkBabyProfile = require('./middleware/checkBabyProfile');
 const indexRoutes = require('./routes/index');
-const chatBotRoutes = require('./routes/chatBot'); // ✅ Import chatbot routes
-
+const chatBotRoutes = require('./routes/chatBot');
+require('dotenv').config(); 
 
 
 mongoose.connect('mongodb://localhost:27017/growbabyDB')
@@ -37,7 +37,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(checkBabyProfile);
 
 app.use('/', indexRoutes);
-app.use('/', chatBotRoutes); // ✅ Mount chatbot routes
+
+app.use('/chatbot', chatBotRoutes); // ✅ Mount chatbot routes under /chatbot path
 
 app.listen(3000, () => {
     console.log("Serving on port 3000")
