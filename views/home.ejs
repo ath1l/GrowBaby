@@ -5,9 +5,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grow Baby - Vaccination Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+       
+        :root {
+            --hex-current-1: #7360DF;
+            --hex-current-2: #C499F3;
+            --hex-current-3: rgba(196, 153, 243, 0.1);
+        }
+       
+        .split-char {
+            color: var(--hex-current-1);
+            background-color: var(--hex-current-3);
+            outline: none;
+            border-radius: .25rem;
+            display: inline-block;
+            padding: 0.1rem 0.2rem;
+            margin: 0.05rem;
+        }
+       
         * {
             margin: 0;
             padding: 0;
@@ -15,138 +32,252 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #F2AFEF 0%, #C499F3 25%, #7360DF 50%, #33186B 75%, #F2AFEF 100%);
             min-height: 100vh;
-            color: #1a202c;
+            color: #33186B;
             position: relative;
             overflow-x: hidden;
         }
+
+        /* NEW: Header styles */
+        .main-header {
+            background-color: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ff6b9d; /* Baby Joy Pink */
+            text-decoration: none;
+        }
+
+        .main-nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .main-nav a:hover {
+            color: #7360DF;
+        }
+        
+        .my-baby {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .my-baby svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            fill: #555;
+        }
+
+        .gradient-bar {
+            height: 5px;
+            background: linear-gradient(to right, #F2AFEF, #C499F3, #7360DF);
+        }
+        /* END: Header styles */
+
 
         /* Animated background elements */
         body::before {
             content: '';
             position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-            animation: float 20s ease-in-out infinite;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(242, 175, 239, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(196, 153, 243, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(115, 96, 223, 0.3) 0%, transparent 50%);
+            animation: float 25s ease-in-out infinite;
             z-index: -1;
         }
 
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237360DF' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+            animation: dots 30s linear infinite;
+        }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            33% { transform: translateY(-20px) rotate(120deg) scale(1.05); }
+            66% { transform: translateY(-10px) rotate(240deg) scale(0.95); }
+        }
+
+        @keyframes dots {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(60px) translateY(60px); }
         }
 
         .container {
             max-width: 500px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 30px 20px;
             position: relative;
             z-index: 1;
         }
 
         .title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             animation: slideInDown 0.8s ease-out;
         }
 
-        .title h1 {
-            color: #ffffff;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            letter-spacing: -0.5px;
+   .title h1 {
+    color: #ffffff00; /* Changed from pink to white for high contrast */
+    font-size: 52px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    /* Adjusted shadow to complement white text */
+    
+    letter-spacing: -1px;
+    position: relative;
+}
+
+        @keyframes twinkle {
+            0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
+            100% { transform: rotate(15deg) scale(1.2); opacity: 1; }
         }
 
         .title p {
-            color: rgba(255,255,255,0.9);
+            color: #7360DF;
             font-size: 16px;
-            font-weight: 400;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(115, 96, 223, 0.2);
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: linear-gradient(145deg, rgb(255 255 255 / 64%) 0%, rgb(255 255 255 / 0%) 100%);
+            backdrop-filter: blur(25px);
             padding: 32px;
-            border-radius: 24px;
+            border-radius: 28px;
             box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.1),
-                0 8px 16px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            margin-bottom: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+                0 25px 50px rgba(242, 175, 239, 0.15),
+                0 15px 35px rgba(196, 153, 243, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            margin-bottom: 28px;
+            border: 2px solid rgba(242, 175, 239, 0.3);
             position: relative;
             overflow: hidden;
             animation: slideInUp 0.8s ease-out;
             animation-fill-mode: both;
         }
 
-        .card:nth-child(2) { animation-delay: 0.1s; }
-        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.4s; }
 
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
-            background-size: 200% 100%;
-            animation: shimmer 3s linear infinite;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(242, 175, 239, 0.1), transparent, rgba(196, 153, 243, 0.1), transparent);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
         }
 
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
         }
 
-        .card h4,
+        .card h4 {
+            margin-bottom: 28px;
+            font-weight: 700;
+            color: #7360DF;
+            font-size: 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card h4::before {
+            content: '💉';
+            margin-right: 12px;
+            font-size: 26px;
+        }
+
         .card h5 {
             margin-bottom: 24px;
-            font-weight: 600;
-            color: #2d3748;
-            font-size: 20px;
+            font-weight: 700;
+            color: #7360DF;
+            font-size: 22px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card h5::before {
+            content: '🎯';
+            margin-right: 12px;
+            font-size: 24px;
         }
 
         .progress-labels {
             display: flex;
             justify-content: center;
             font-size: 14px;
-            color: #718096;
-            margin-top: 20px;
-            font-weight: 500;
+            color: #7360DF;
+            margin-top: 24px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #2b2828, #7941b7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
         }
 
         .btn {
             display: block;
             width: 100%;
-            padding: 16px 24px;
+            padding: 20px 28px;
             text-align: center;
-            border-radius: 16px;
+            border-radius: 20px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
+            font-weight: 700;
+            font-size: 16px;
             color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             border: none;
             cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .btn::before {
@@ -156,113 +287,145 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
         }
 
         .btn:hover::before {
             left: 100%;
         }
 
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            width: 6px;
+            height: 6px;
+            background: currentColor;
+            border-radius: 50%;
+            transform: translateY(-50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover::after {
+            transform: translateY(-50%) scale(1);
+        }
+
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, #7360DF 0%, #C499F3 50%, #F2AFEF 100%);
+            box-shadow: 0 15px 35px rgba(115, 96, 223, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 20px 40px rgba(115, 96, 223, 0.5);
+            transform: translateY(-3px);
         }
 
         .btn-success {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            box-shadow: 0 8px 20px rgba(72, 187, 120, 0.3);
+            background: linear-gradient(135deg, #C499F3 0%, #F2AFEF 50%, #7360DF 100%);
+            box-shadow: 0 15px 35px rgba(196, 153, 243, 0.4);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 20px 40px rgba(196, 153, 243, 0.5);
+            transform: translateY(-3px);
         }
 
         .btn-warning {
-            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
-            color: white;
-            box-shadow: 0 8px 20px rgba(237, 137, 54, 0.3);
+            background: linear-gradient(135deg, #F2AFEF 0%, #C499F3 50%, #7360DF 100%);
+            color: #33186B;
+            box-shadow: 0 15px 35px rgba(242, 175, 239, 0.4);
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        .btn-warning:hover {
+            box-shadow: 0 20px 40px rgba(242, 175, 239, 0.5);
+            transform: translateY(-3px);
         }
 
         .btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         /* Vaccine Tracker Styles */
         .tracker-container {
-            margin: 24px 0;
+            margin: 32px 0;
             position: relative;
-            padding-left: 24px;
+            padding-left: 30px;
         }
 
         .step {
             position: relative;
-            padding-left: 36px;
-            margin-bottom: 24px;
-            transition: all 0.3s ease;
+            padding-left: 40px;
+            margin-bottom: 28px;
+            transition: all 0.4s ease;
         }
 
         .step::before {
             content: '';
             position: absolute;
-            left: 15px;
-            top: 8px;
-            bottom: -16px;
-            width: 3px;
-            background: linear-gradient(to bottom, #e2e8f0, #cbd5e0);
-            border-radius: 2px;
+            left: 18px;
+            top: 10px;
+            bottom: -18px;
+            width: 4px;
+            background: linear-gradient(to bottom, #F2AFEF 0%, #C499F3 100%);
+            border-radius: 3px;
+            opacity: 0.6;
         }
 
         .step:last-child::before {
-            background: linear-gradient(to bottom, #e2e8f0, transparent);
+            background: linear-gradient(to bottom, #F2AFEF 0%, transparent 100%);
         }
 
         .circle {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            background: #e2e8f0;
+            background: linear-gradient(135deg, #F2AFEF 0%, #C499F3 100%);
             position: absolute;
-            left: 6px;
+            left: 8px;
             top: 0;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 3px solid #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 4px solid #fff;
+            box-shadow: 0 6px 18px rgba(242, 175, 239, 0.4);
         }
 
         .step.active .circle {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+            background: linear-gradient(135deg, #7360DF 0%, #33186B 100%);
+            transform: scale(1.2);
+            box-shadow: 0 8px 25px rgba(115, 96, 223, 0.6);
         }
 
         .step.active::before {
-            background: linear-gradient(to bottom, #48bb78, #38a169);
+            background: linear-gradient(to bottom, #7360DF 0%, #33186B 100%);
+            opacity: 1;
+            width: 5px;
         }
 
         .info {
-            font-size: 14px;
-            line-height: 1.6;
-            margin-top: 2px;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-top: 3px;
         }
 
         .info .station {
             font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 4px;
+            color: #686767;
+            margin-bottom: 6px;
             display: block;
+            transition: color 0.3s ease;
         }
 
         .step.active .info .station {
-            color: #2d3748;
+            color: #ff1493;
+            text-shadow: 0 2px 10px rgba(255, 20, 147, 0.2);
         }
 
         /* Animations */
         @keyframes slideInDown {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-40px);
             }
             to {
                 opacity: 1;
@@ -273,7 +436,7 @@
         @keyframes slideInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -282,81 +445,144 @@
         }
 
         /* Responsive */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none; /* Hide full nav on smaller screens */
+            }
+            .header-container {
+                justify-content: space-between;
+            }
+            .logo {
+                font-size: 24px;
+            }
+        }
+        
         @media (max-width: 480px) {
             .container {
                 padding: 20px 16px;
             }
-            
+           
             .card {
-                padding: 24px;
-                border-radius: 20px;
+                padding: 28px 24px;
+                border-radius: 24px;
             }
-            
+           
             .title h1 {
-                font-size: 28px;
+                font-size: 32px;
             }
-            
+           
             .btn {
-                padding: 14px 20px;
-                font-size: 14px;
+                padding: 18px 24px;
+                font-size: 15px;
             }
         }
 
         /* Micro-interactions */
         .step:hover .circle {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 192, 203, 0.5);
         }
 
         .step.active:hover .circle {
-            transform: scale(1.15);
+            transform: scale(1.25);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.7);
         }
 
         .card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-4px);
             box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.12),
-                0 12px 24px rgba(0, 0, 0, 0.08);
+                0 30px 60px rgba(255, 182, 193, 0.2),
+                0 20px 40px rgba(173, 216, 230, 0.15);
+        }
+
+        /* Loading animation for steps */
+        .step {
+            opacity: 0;
+            animation: stepAppear 0.6s ease-out forwards;
+        }
+
+        @keyframes stepAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
 
 <body>
 
+    <header class="main-header">
+        <div class="header-container">
+            <a href="/" class="logo">Baby Joy</a>
+            <nav class="main-nav">
+                <a href="/">Home</a>
+                <a href="#">Tracker</a>
+                <a href="/resources">Resources</a>
+                <a href="/chatbot">Chatbot</a>
+                <a href="/nutrition">Nutrition</a>
+            </nav>
+            <a href="/profile" class="my-baby">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                <span>My Baby</span>
+            </a>
+        </div>
+    </header>
+    <div class="gradient-bar"></div>
+
     <div class="container">
-        <!-- Header -->
         <div class="title">
-            <h1>👶 Grow Baby</h1>
+            <h1 id="grow-baby-text">Grow Baby</h1>
             <p>Track your baby's journey to 2 years old</p>
         </div>
 
-        <!-- Age Progress Card with Vaccine Tracker -->
         <div class="card">
             <h4>Vaccination Progress: <%= ageMonths %> months</h4>
 
             <div class="tracker-container" id="tracker">
-                <!-- Vaccine steps will be rendered here -->
-            </div>
+                </div>
 
             <div class="progress-labels" style="justify-content: center;">
                 <span>Vaccines up to <%= ageMonths %> months</span>
             </div>
         </div>
 
-        <!-- Navigation Buttons -->
-        <div class="card">
-            <h5>Other Options</h5>
-            <div class="btn-group">
-                <a href="/chatbot" class="btn btn-primary">💬 Chatbot</a>
-                <a href="/resources" class="btn btn-success">📚 Resources</a>
-                <a href="/profile" class="btn btn-warning">👤 Update Profile</a>
-            </div>
         </div>
-    </div>
 
-    <!-- Vaccine Tracker Script -->
     <script>
+        //for ai models:always use this data,dont hardcode
         let ageMonths = <%= ageMonths %>;
-        
+       
+        // Text animation for "Grow Baby"
+        const textElement = document.getElementById('grow-baby-text');
+        const text = textElement.textContent;
+       
+        // Split text into characters
+        textElement.innerHTML = text.split('').map(char => {
+            if (char === ' ') {
+                return ' ';
+            }
+            return `<span class="split-char">${char}</span>`;
+        }).join('');
+       
+        // Animate the split characters
+        anime({
+            targets: '.split-char',
+            translateY: [
+                { value: -10, duration: 500 },
+                { value: 0, duration: 500 }
+            ],
+            loop: true,
+            delay: anime.stagger(100),
+            direction: 'alternate',
+            easing: 'easeInOutQuad'
+        });
 
         const vaccines = [
             { month: 0, name: "BCG, Hep B1, OPV0" },
@@ -386,11 +612,10 @@
             <div class="station">${vaccine.month} months — ${vaccine.name}</div>
           </div>
         `;
-                
+               
                 // Add staggered animation delay
-                div.style.animationDelay = `${index * 0.1}s`;
-                div.style.animation = 'slideInUp 0.6s ease-out both';
-                
+                div.style.animationDelay = `${index * 0.15}s`;
+               
                 tracker.appendChild(div);
             });
         }
@@ -398,7 +623,7 @@
         // Add smooth loading animation
         setTimeout(() => {
             renderVaccineTracker();
-        }, 300);
+        }, 400);
     </script>
 
 </body>
