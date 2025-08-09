@@ -1,71 +1,312 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Parenting Resources</title>
-  <link rel="stylesheet" href="/css/resources.css">
-  <style>
-    /* Optional: Responsive YouTube embed */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 ratio */
-      height: 0;
-      overflow: hidden;
-      border-radius: 6px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parenting Resources</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --hex-current-1: #7360DF;
+            --hex-current-2: #C499F3;
+            --hex-current-3: #F2AFEF;
+            --main-text-color: #33186B;
+            --background-gradient: linear-gradient(135deg, #F2AFEF 0%, #C499F3 25%, #7360DF 50%, #33186B 75%, #F2AFEF 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-  </style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-gradient);
+            min-height: 100vh;
+            color: var(--main-text-color);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            overflow-x: hidden;
+            perspective: 1px;
+            transform-style: preserve-3d;
+        }
+
+        /* Creative, layered background animations with parallax effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(242, 175, 239, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(196, 153, 243, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(115, 96, 223, 0.3) 0%, transparent 50%);
+            animation: float 25s ease-in-out infinite;
+            z-index: -1;
+            transform: translateZ(-1px) scale(2);
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237360DF' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+            animation: dots 30s linear infinite;
+            transform: translateZ(-2px) scale(3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(-10px) rotate(240deg); }
+        }
+
+        @keyframes dots {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(60px) translateY(60px); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+            backdrop-filter: blur(25px);
+            border-radius: 28px;
+            box-shadow: 
+                0 25px 50px rgba(242, 175, 239, 0.15),
+                0 15px 35px rgba(196, 153, 243, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(242, 175, 239, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--hex-current-1);
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        h1:hover {
+            transform: scale(1.05) rotate(-1deg);
+            color: var(--main-text-color);
+            text-shadow: 0 5px 15px rgba(115, 96, 223, 0.4);
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--main-text-color);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--hex-current-2);
+            padding-bottom: 10px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--hex-current-2), var(--hex-current-3));
+            animation: expandBorder 1.5s ease-out;
+        }
+        @keyframes expandBorder {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .h2-icon {
+            font-size: 1.2em;
+            margin-right: 15px;
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        .videos-h2 .h2-icon { animation: wiggle 1s infinite; }
+        .articles-h2 .h2-icon { animation: pop 0.8s ease-in-out infinite alternate; }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 10px 30px rgba(196, 153, 243, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: cardFadeIn 0.8s ease-out;
+            animation-delay: var(--delay);
+            animation-fill-mode: backwards;
+        }
+        
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(196, 153, 243, 0.3);
+            border-color: var(--hex-current-2);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--hex-current-1);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--hex-current-2), var(--hex-current-3));
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(196, 153, 243, 0.4);
+        }
+
+        .card a:hover {
+            background: linear-gradient(45deg, var(--hex-current-3), var(--hex-current-2));
+            box-shadow: 0 8px 20px rgba(196, 153, 243, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive YouTube embed */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 6px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .container {
+                padding: 20px;
+            }
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Resources for Parents of a <%= ageMonths %>-Month-Old Baby</h1>
+    <div class="container">
+        <h1 style="text-align: center;">Resources for Parents of a <%= ageMonths %>-Month-Old Baby</h1>
 
-    <section>
-      <h2>📺 Recommended Videos</h2>
-      <div class="cards">
-        <% resources.videos.forEach(video => { 
-             const match = video.link.match(/(?:v=|youtu\.be\/)([^&\n?#]+)/);
-             const videoId = match ? match[1] : null;
-        %>
-          <div class="card">
-            <h3><%= video.title %></h3>
-            <p><%= video.description %></p>
+        <section>
+            <h2 class="videos-h2"><span class="h2-icon">📺</span> Recommended Videos</h2>
+            <div class="cards">
+                <% resources.videos.forEach((video, index) => { 
+                    const match = video.link.match(/(?:v=|youtu\.be\/)([^&\n?#]+)/);
+                    const videoId = match ? match[1] : null;
+                %>
+                    <div class="card" style="--delay: <%= index * 0.15 %>s;">
+                        <h3><%= video.title %></h3>
+                        <p><%= video.description %></p>
 
-            <% if (videoId) { %>
-              <div class="video-container">
-                <iframe 
-                  src="https://www.youtube.com/embed/<%= videoId %>" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen>
-                </iframe>
-              </div>
-            <% } else { %>
-              <a href="<%= video.link %>" target="_blank">Watch Video</a>
-            <% } %>
-          </div>
-        <% }) %>
-      </div>
-    </section>
+                        <% if (videoId) { %>
+                            <div class="video-container">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/<%= videoId %>" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        <% } else { %>
+                            <a href="<%= video.link %>" target="_blank">Watch Video</a>
+                        <% } %>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
 
-    <section>
-      <h2>📚 Recommended Articles</h2>
-      <div class="cards">
-        <% resources.articles.forEach(article => { %>
-          <div class="card">
-            <h3><%= article.title %></h3>
-            <p><%= article.description %></p>
-            <a href="<%= article.link %>" target="_blank">Read Article</a>
-          </div>
-        <% }) %>
-      </div>
-    </section>
-  </div>
+        <section>
+            <h2 class="articles-h2"><span class="h2-icon">📚</span> Recommended Articles</h2>
+            <div class="cards">
+                <% resources.articles.forEach((article, index) => { %>
+                    <div class="card" style="--delay: <%= (index + resources.videos.length) * 0.15 %>s;">
+                        <h3><%= article.title %></h3>
+                        <p><%= article.description %></p>
+                        <a href="<%= article.link %>" target="_blank">Read Article</a>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+    </div>
 </body>
 </html>

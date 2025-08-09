@@ -1,125 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milestones for <%= babyName %></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
-        body {
-            font-family: 'Comic Sans MS', 'Arial', sans-serif;
-            background: #f0f2f5;
-            margin: 0;
-            padding: 40px;
-            color: #333;
-            text-align: center;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --hex-current-1: #7360DF;
+            --hex-current-2: #C499F3;
+            --hex-current-3: rgba(196, 153, 243, 0.1);
         }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #F2AFEF 0%, #C499F3 25%, #7360DF 50%, #33186B 75%, #F2AFEF 100%);
+            min-height: 100vh;
+            color: #33186B;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background elements - Copied from the vaccination tracker */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(242, 175, 239, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(196, 153, 243, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(115, 96, 223, 0.3) 0%, transparent 50%);
+            animation: float 25s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237360DF' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+            animation: dots 30s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            33% { transform: translateY(-20px) rotate(120deg) scale(1.05); }
+            66% { transform: translateY(-10px) rotate(240deg) scale(0.95); }
+        }
+
+        @keyframes dots {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(60px) translateY(60px); }
+        }
+        
         .container {
             max-width: 900px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            margin: 40px auto;
+            padding: 30px 20px;
+            background: linear-gradient(145deg, rgb(255 255 255 / 64%) 0%, rgb(255 255 255 / 0%) 100%);
+            backdrop-filter: blur(25px);
+            border-radius: 28px;
+            box-shadow: 
+                0 25px 50px rgba(242, 175, 239, 0.15),
+                0 15px 35px rgba(196, 153, 243, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(242, 175, 239, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
-        h1, h2 {
-            color: #4a4a4a;
-            font-weight: bold;
-        }
+        
         h1 {
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 10px;
+            color: #33186B;
+            font-size: 42px;
+            font-weight: 800;
             margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(115, 96, 223, 0.2);
+            letter-spacing: -1px;
+            position: relative;
         }
+        h1::after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: 0;
+            font-size: 2rem;
+            animation: twinkle 1s infinite alternate;
+        }
+        @keyframes twinkle {
+            from { transform: scale(1) rotate(0deg); opacity: 0.8; }
+            to { transform: scale(1.2) rotate(5deg); opacity: 1; }
+        }
+        
+        h2 {
+            color: #7360DF;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 5px rgba(115, 96, 223, 0.2);
+        }
+        
         .milestone-form-container {
-            background-color: #f8f9fa;
-            border: 1px solid #e2e2e2;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.7);
             padding: 25px;
-            border-radius: 8px;
+            border-radius: 20px;
             margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
         }
+
         .milestone-form {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
+
         .milestone-form input, .milestone-form textarea {
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            padding: 16px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.6);
             font-size: 16px;
+            color: #33186B;
             transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
         }
+
         .milestone-form input:focus, .milestone-form textarea:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0,123,255,0.25);
+            border-color: #C499F3;
+            box-shadow: 0 0 15px rgba(196, 153, 243, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.05);
+            background: #fff;
             outline: none;
         }
+
         .milestone-form textarea {
             resize: vertical;
         }
+        
         .milestone-form button {
-            padding: 12px;
-            background-color: #28a745;
+            display: block;
+            width: 100%;
+            padding: 20px 28px;
+            text-align: center;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
             color: white;
+            background: linear-gradient(135deg, #7360DF 0%, #C499F3 50%, #F2AFEF 100%);
+            box-shadow: 0 15px 35px rgba(115, 96, 223, 0.4);
             border: none;
-            border-radius: 6px;
             cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .milestone-form button:hover {
-            background-color: #218838;
+            box-shadow: 0 20px 40px rgba(115, 96, 223, 0.5);
+            transform: translateY(-3px);
         }
+
+        .milestone-form button:active {
+            transform: translateY(-1px);
+        }
+
         .milestone-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
             justify-content: center;
         }
-        .sticky-note {
-            background-color: #fff9c4; /* Light yellow sticky note color */
+
+        .milestone-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+            backdrop-filter: blur(15px);
             padding: 25px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1), -5px -5px 15px rgba(255,255,255,0.5);
-            border-radius: 8px;
-            text-align: left;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 10px 30px rgba(196, 153, 243, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8);
             position: relative;
-            transition: transform 0.3s ease;
-            transform: rotate(<%= Math.random() * 4 - 2 %>deg); /* Random slight rotation */
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: rotate(0deg);
+            animation: popIn 0.8s ease-out forwards;
+            animation-delay: var(--delay);
         }
-        .sticky-note:hover {
-            transform: scale(1.05) rotate(0deg);
-            z-index: 10;
+        
+        .milestone-card:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 40px rgba(196, 153, 243, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
-        .sticky-note h3 {
+        
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .milestone-card h3 {
             margin: 0 0 10px;
             font-size: 1.5em;
-            color: #333;
-            font-weight: bold;
+            color: #7360DF;
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(115, 96, 223, 0.1);
+            position: relative;
+            padding-left: 35px;
         }
-        .sticky-note p {
+
+        .milestone-card h3::before {
+            content: '🎉';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+        }
+
+        .milestone-card p {
             margin: 0;
-            color: #555;
+            color: #33186B;
             font-size: 1em;
-            line-height: 1.4;
+            line-height: 1.6;
         }
-        .sticky-note .date {
+
+        .milestone-card .date {
             display: block;
             margin-top: 15px;
             font-size: 0.9em;
-            color: #777;
+            color: #555;
             text-align: right;
             font-style: italic;
+            text-shadow: none;
         }
+
         .no-milestones {
             text-align: center;
-            color: #888;
+            color: #ffffff;
             font-size: 1.2em;
-            padding: 20px;
+            padding: 40px;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Milestones for <%= babyName %></h1>
@@ -135,9 +280,9 @@
 
         <h2>Recorded Milestones</h2>
         <% if (milestones.length > 0) { %>
-            <div class="milestone-grid">
-                <% milestones.forEach(m => { %>
-                    <div class="sticky-note">
+            <div class="milestone-grid" id="milestone-grid">
+                <% milestones.forEach((m, index) => { %>
+                    <div class="milestone-card" style="--delay: <%= index * 0.1 %>s;">
                         <h3><%= m.title %></h3>
                         <p><%= m.description %></p>
                         <p class="date"><%= m.date.toLocaleDateString() %></p>
@@ -151,4 +296,5 @@
         <% } %>
     </div>
 </body>
+
 </html>
