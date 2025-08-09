@@ -101,4 +101,17 @@ To set up the project locally:
 * Jerry Bernard
 * Athil johnson
 
+# Screenshots 
+
+![Demo screenshot](screenshots/1.jpg)
+
+![Demo screenshot](screenshots/2.jpg)
+
+![Demo screenshot](screenshots/3.jpg)
+
+![Demo screenshot](screenshots/4.jpg)
+
+![Demo screenshot](screenshots/5.jpg)
+
+
 
