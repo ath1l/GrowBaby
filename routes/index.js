@@ -6,7 +6,7 @@ const Baby = require('../models/Baby');
 // Home page
 router.get('/', async (req, res) => {
     const baby = await Baby.findOne(); // adjust query for logged-in user
-
+    const babyName = baby.name;
     let ageMonths = 0;
     let progress = 0;
 
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
         progress = Math.min((ageMonths / 24) * 100, 100);
     }
 
-    res.render('home', { progress, ageMonths });
+    res.render('home', { progress, ageMonths ,babyName});
 });
 
 
