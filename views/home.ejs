@@ -16,8 +16,8 @@
         }
        
         .split-char {
-            color: var(--hex-current-1);
-            background-color: var(--hex-current-3);
+            color: #6f55ff;
+            background-color:rgb(196 153 243 / 0%);
             outline: none;
             border-radius: .25rem;
             display: inline-block;
@@ -42,7 +42,7 @@
 
         /* NEW: Header styles */
         .main-header {
-            background-color: #ffffff;
+            background-color: #c89af000;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -511,6 +511,14 @@
                 transform: translateX(0);
             }
         }
+         .nav-link {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600; /* A semi-bold weight works well for navigation */
+    font-size: 16px;
+    text-decoration: none;
+    color: #333; /* Use your brand's color */
+    margin: 0 15px;
+  }
     </style>
 </head>
 
@@ -520,11 +528,11 @@
         <div class="header-container">
             <a href="/" class="logo">Baby Joy</a>
             <nav class="main-nav">
-                <a href="/">Home</a>
-                <a href="/milestone">Milestone</a>
-                <a href="/resources">Resources</a>
-                <a href="/chatbot">Chatbot</a>
-                <a href="/nutrition">Nutrition</a>
+                <a href="/" class="nav-link">Home</a>
+                 <a href="/milestone" class="nav-link">Milestone</a>
+  <a href="/resources" class="nav-link">Resources</a>
+  <a href="/chatbot" class="nav-link">Chatbot</a>
+  <a href="/nutrition" class="nav-link">Nutrition</a>
             </nav>
             <a href="/profile" class="my-baby">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -539,7 +547,7 @@
     <div class="container">
         <div class="title">
             <h1 id="grow-baby-text">Grow Baby</h1>
-            <p>Track your baby's journey to 2 years old</p>
+            <p>From the first smile to the first step, track the joy.</p>
         </div>
 
         <div class="card">
