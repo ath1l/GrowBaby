@@ -23,23 +23,23 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const userMessage = req.body.message;
-  const baby = await Baby.findOne(); // adjust query for logged-in user
+  const baby = await Baby.findOne();
 
-      let ageMonths = 0;
-
-      if (baby) {
-          const dob = new Date(baby.dob);
-          const today = new Date();
-          ageMonths = (today.getFullYear() - dob.getFullYear()) * 12 +
-                      (today.getMonth() - dob.getMonth());
+  let ageMonths = 0;
+  if (baby) {
+    const dob = new Date(baby.dob);
+    const today = new Date();
+    ageMonths = (today.getFullYear() - dob.getFullYear()) * 12 +
+                (today.getMonth() - dob.getMonth());
   }
-  
+
   const systemPrompt = {
-  role: "user",
-  parts: [{
-    text: `
-  You are a chat bot for the GrowBaby web app platform. The baby's name is ${baby ? baby.name : "unknown"} and they are ${ageMonths} months old. Give small and precise replies without headings ,bolding,etcc.
-  Respond in a warm and helpful tone. If the question is unrelated, politely redirect.
+    role: "user",
+    parts: [{
+      text: `
+        You are a chat bot for the GrowBaby web app platform. The baby's name is ${baby ? baby.name : "unknown"} and they are ${ageMonths} months old.
+        Give small and precise replies without headings ,bolding,etc.
+        Respond in a warm and helpful tone. If the question is unrelated, politely redirect.
       `.trim()
     }]
   };
@@ -48,39 +48,30 @@ router.post('/', async (req, res) => {
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
     const allLogs = await ChatLog.find().sort({ timestamp: 1 });
-
     const trimmedLogs = allLogs.slice(-10);
 
     const history = [
-    systemPrompt,
-    ...trimmedLogs.flatMap(log => ([
+      systemPrompt,
+      ...trimmedLogs.flatMap(log => ([
         { role: "user", parts: [{ text: log.userMessage }] },
         { role: "model", parts: [{ text: log.botResponse }] }
-    ]))
+      ]))
     ];
 
     const chat = model.startChat({ history });
-
     const result = await chat.sendMessage(userMessage);
     const botResponse = result.response.text();
 
     await new ChatLog({ userMessage, botResponse }).save();
 
-    const updatedLogs = await ChatLog.find().sort({ timestamp: 1 });
-    const formatted = updatedLogs.map(log => ({
-      user: log.userMessage,
-        bot: log.botResponse
-    }));
-
-    res.render('bot', { messages: formatted });
-
+    // Redirect to GET route instead of rendering
+    res.redirect('/chatbot');
   } catch (err) {
     console.error('Gemini error:', err);
-    res.render('bot', {
-      messages: [{ user: userMessage, bot: "Something went wrong!" }]
-    });
+    res.redirect('/chatbot'); // Even on error, redirect to avoid resubmit
   }
 });
+
 
 
 router.post('/clear', async (req, res) => {

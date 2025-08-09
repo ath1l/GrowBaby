@@ -1,0 +1,149 @@
+:root {
+    --user-color: #ffdce0;   /* pastel pink */
+    --bot-color: #e6f9ff;    /* pastel blue */
+    --bg-color: #fff8f3;     /* warm cream */
+    --accent-color: #ffb6c1; /* soft pink */
+    --border-radius: 15px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: var(--accent-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: 900px; /* bigger than before */
+    margin: 0 auto;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: #fffaf5;
+    border-bottom: 1px solid #f2dada;
+}
+
+.tagline {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* Small, unobtrusive clear button */
+.clear-btn {
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    color: #bbb;
+    cursor: pointer;
+    padding: 2px 5px;
+    transition: color 0.2s;
+}
+.clear-btn:hover {
+    color: #ff6b81;
+}
+
+.chat-box {
+    flex: 1;
+    background: white;
+    padding: 1rem;
+    overflow-y: auto;
+    border-top: 1px solid #f2dada;
+    border-bottom: 1px solid #f2dada;
+
+    display: flex;              /* NEW */
+    flex-direction: column;     /* NEW */
+}
+
+.message {
+    max-width: 80%;
+    padding: 0.75rem;
+    margin: 0.4rem 0;
+    border-radius: var(--border-radius);
+    line-height: 1.4;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.user-msg {
+    background-color: var(--user-color);
+    align-self: flex-end;       /* Right align */
+    text-align: right;
+    border-top-right-radius: 0;
+}
+
+.bot-msg {
+    background-color: var(--bot-color);
+    align-self: flex-start;     /* Left align */
+    text-align: left;
+    border-top-left-radius: 0;
+}
+
+.empty-text {
+    text-align: center;
+    color: #aaa;
+    margin-top: 2rem;
+}
+
+.chat-form {
+    display: flex;
+    padding: 1rem;
+    background: #fff;
+    gap: 0.5rem;
+    border-top: 1px solid #f2dada;
+}
+
+.chat-form input[type="text"] {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #f2dada;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.chat-form button {
+    padding: 0.75rem 1.2rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.chat-form button:hover {
+    background-color: #ffa7b0;
+}
+
+@media (max-width: 600px) {
+    .chat-form {
+        flex-direction: column;
+    }
+    .chat-form input,
+    .chat-form button {
+        width: 100%;
+    }
+}

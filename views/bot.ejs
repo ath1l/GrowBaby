@@ -5,143 +5,7 @@
     <meta charset="UTF-8">
     <title>GrowBaby ChatBot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        :root {
-            --user-color: #d0e7ff;
-            --bot-color: #e6ffe6;
-            --border-radius: 15px;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f2f2f2;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background-color: #6cb4f4;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .chat-box {
-            flex: 1;
-            background: white;
-            padding: 1rem;
-            overflow-y: auto;
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .message {
-            max-width: 80%;
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            border-radius: var(--border-radius);
-            line-height: 1.4;
-        }
-
-        .user-msg {
-            background-color: var(--user-color);
-            align-self: flex-end;
-            text-align: right;
-            border-top-right-radius: 0;
-        }
-
-        .bot-msg {
-            background-color: var(--bot-color);
-            align-self: flex-start;
-            text-align: left;
-            border-top-left-radius: 0;
-        }
-
-        .chat-form {
-            display: flex;
-            padding: 1rem;
-            background: #fff;
-            gap: 0.5rem;
-            border-top: 1px solid #ccc;
-        }
-
-        .chat-form input[type="text"] {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-        }
-
-        .chat-form button {
-            padding: 0.75rem 1.2rem;
-            background-color: #6cb4f4;
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: #f8f8f8;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .top-bar form {
-            margin: 0;
-        }
-
-        .top-bar button {
-            background: #ff4d4d;
-            color: white;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 600px) {
-            .chat-box {
-                padding: 0.5rem;
-            }
-
-            .chat-form {
-                padding: 0.5rem;
-                flex-direction: column;
-            }
-
-            .chat-form input,
-            .chat-form button {
-                width: 100%;
-            }
-
-            .top-bar {
-                flex-direction: column;
-                gap: 0.5rem;
-                padding: 0.5rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/bot.css">
 </head>
 
 <body>
@@ -149,25 +13,21 @@
 
     <div class="container">
         <div class="top-bar">
-            <div>Ask anything about baby tracking 👶</div>
+            <div class="tagline">Ask anything about baby tracking 👶</div>
             <form action="/chatbot/clear" method="POST">
-                <button type="submit">Clear Chat</button>
+                <button type="submit" class="clear-btn">✖</button>
             </form>
         </div>
 
         <div class="chat-box" id="chat-box">
-            <% if (messages.length> 0) { %>
-                <% messages.slice().reverse().forEach(msg=> { %>
-                    <div class="message user-msg">
-                        <%= msg.user %>
-                    </div>
-                    <div class="message bot-msg">
-                        <%= msg.bot %>
-                    </div>
-                    <% }) %>
-                        <% } else { %>
-                            <p style="text-align:center; color: #888;">No messages yet. Say hi! 👋</p>
-                            <% } %>
+            <% if (messages.length > 0) { %>
+                <% messages.slice().reverse().forEach(msg => { %>
+                    <div class="message user-msg"><%= msg.user %></div>
+                    <div class="message bot-msg"><%= msg.bot %></div>
+                <% }) %>
+            <% } else { %>
+                <p class="empty-text">No messages yet. Say hi! 👋</p>
+            <% } %>
         </div>
 
         <form method="POST" class="chat-form">
@@ -177,7 +37,6 @@
     </div>
 
     <script>
-        // Scroll to bottom when page loads
         const chatBox = document.getElementById('chat-box');
         chatBox.scrollTop = chatBox.scrollHeight;
     </script>
