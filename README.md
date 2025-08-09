@@ -1,117 +1,116 @@
-Here’s a **clean, well-structured `README.md`** that’s ready to drop into your repo:
+#  Grow Baby
 
-````markdown
-# Grow Baby
-
-Grow Baby is a comprehensive web application designed to help new parents track and manage their baby's health, nutrition, and development in one convenient place.  
-Built with a modern tech stack, it leverages the power of AI to provide personalized insights and support.
+**Grow Baby** is a comprehensive web application designed to help new parents track and manage their baby's health, nutrition, and development — all in one convenient place.  
+Built with a **modern tech stack** and powered by **Google Gemini AI**, it provides personalized insights, reminders, and curated parenting resources.
 
 ---
 
-## 🚀 Key Features
+# ✨ Features at a Glance
 
-- **Personalized Baby Profile** – Create a detailed profile for your baby, including name, date of birth, and gender.  
-- **Vaccination Tracker** – A visual, age-based tracker to monitor and manage your baby's vaccination schedule.  
-- **Milestone Log** – Easily record and view all of your baby's developmental milestones and special "firsts."  
-- **AI-Powered Nutrition Analysis** – Log your baby's food intake and get an instant nutritional breakdown and parenting tips from the **Gemini AI** model.  
-- **Weekly Nutrition Summary** – View a weekly summary of your baby's nutrition, complete with data visualizations and an AI-generated summary of trends.  
-- **Parenting Resources** – Curated videos and articles tailored to your baby's age, dynamically fetched from popular sources.  
-- **AI Chatbot** – A friendly chatbot to answer your general baby care and development questions.
-
----
-
-## 🛠️ Technology Stack
-
-**Backend:** Node.js, Express.js  
-**Frontend:** EJS (Embedded JavaScript Templating)  
-**Database:** MongoDB  
-**AI Integration:** Google Gemini API (`gemini-2.5-pro` and `gemini-2.0-flash-preview-image-generation`)  
-**Other Libraries:**  
-- Mongoose  
-- yt-search  
-- rss-parser  
-- Chart.js  
-- anime.js  
+- **👶 Personalized Baby Profile** – Create a profile with your baby's name, date of birth, and gender.  
+- **💉 Vaccination Tracker** – Visual, age-based tracker to monitor vaccination schedules.  
+- **📜 Milestone Log** – Record and view important developmental milestones.  
+- **🥗 AI-Powered Nutrition Analysis** – Log meals and get instant nutritional breakdown & tips.  
+- **📊 Weekly Nutrition Summary** – AI-generated insights with charts and trends.  
+- **🎥 Parenting Resources** – Curated videos & articles fetched dynamically.  
+- **🤖 AI Chatbot** – Ask baby care & development questions anytime.
 
 ---
 
-## 📦 Installation
+# 🛠️ Tech Stack
 
-To set up the project locally:
-
-1. **Clone the repository:**
-   ```bash
-   git clone [your-repository-url]
-   cd growbaby
-````
-
-2. **Install dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables:**
-   Create a `.env` file in the project root:
-
-   ```env
-   GEMINI_API_KEY="your_api_key_here"
-   MONGO_URI="mongodb://localhost:27017/growbabyDB"
-   ```
-
-4. **Start MongoDB:**
-   Ensure your local MongoDB server is running.
-
-5. **Run the application:**
-
-   ```bash
-   node app.js
-   ```
-
-6. **Access the app:**
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+| Category       | Technologies |
+|----------------|--------------|
+| **Backend**    | Node.js, Express.js |
+| **Frontend**   | EJS (Embedded JavaScript Templating) |
+| **Database**   | MongoDB |
+| **AI**         | Google Gemini API (`gemini-2.5-pro`, `gemini-2.0-flash-preview-image-generation`) |
+| **Libraries**  | Mongoose, yt-search, rss-parser, Chart.js, anime.js |
 
 ---
 
-## 💡 Usage Guide
+# 📦 Installation Guide
 
-* **Profile Setup:** If no baby profile exists, you'll be redirected to `/profile` to create one.
-* **Home Page:** Shows the vaccination tracker.
-* **Milestones:** Add and view developmental achievements.
-* **Nutrition:** Log food and see AI-generated insights.
-* **Resources:** Get curated videos/articles.
-* **Chatbot:** Ask questions to the AI assistant.
+## 1️⃣ Clone the Repository
+```bash
+git clone [your-repository-url]
+cd growbaby
+```
+
+## 2️⃣ Install Dependencies
+```bash
+npm install
+```
+
+## 3️⃣ Configure Environment Variables
+Create a `.env` file in the root directory:
+```env
+GEMINI_API_KEY="your_api_key_here"
+MONGO_URI="mongodb://localhost:27017/growbabyDB"
+```
+
+## 4️⃣ Start MongoDB
+Make sure your local MongoDB server is running.
+
+## 5️⃣ Run the Application
+```bash
+node app.js
+```
+
+## 6️⃣ Access in Browser
+Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🔮 Future Enhancements
+# 💡 How to Use
 
-* **User Authentication** – Multiple parents & multiple baby profiles.
-* **Growth Charts** – Height & weight tracking over time.
-* **Reminders & Notifications** – For upcoming vaccinations.
-* **Multi-language Support** – For global accessibility.
-* **More AI Features** – Sleep schedule recommendations, activity suggestions.
+## 📝 Profile Setup
+If no baby profile exists, you'll be redirected to `/profile` to create one.
+
+## 🏠 Home Page
+Displays the **vaccination tracker**.
+
+## 🎯 Milestones
+Add and view developmental achievements.
+
+## 🍽 Nutrition
+Log daily meals and receive AI-powered insights.
+
+## 📚 Resources
+Get curated age-based videos & articles.
+
+## 💬 Chatbot
+Ask parenting-related questions in real time.
 
 ---
 
-## 👥 Team
+# 🔮 Planned Enhancements
 
-* Joel Jeggy
-* Adarsh Pravi
-* Jerry Bernard
-* Athil johnson
+- **🔑 User Authentication** – Support for multiple parents & profiles.  
+- **📈 Growth Charts** – Height & weight tracking over time.  
+- **⏰ Notifications** – Alerts for upcoming vaccinations.  
+- **🌍 Multi-language Support** – For global accessibility.  
+- **💤 AI Sleep Schedule** – Recommendations based on baby's age.
 
-# Screenshots 
+---
 
-![Demo screenshot](screenshots/1.jpg)
+# 👥 Team – *Team Pazhampori*
 
-![Demo screenshot](screenshots/2.jpg)
+- **Joel Jeggy**  
+- **Adarsh Pravi**  
+- **Jerry Bernard**  
+- **Athil Johnson**
 
-![Demo screenshot](screenshots/3.jpg)
+---
 
-![Demo screenshot](screenshots/4.jpg)
+# 🖼 Screenshots
 
-![Demo screenshot](screenshots/5.jpg)
+<p align="center">
+  <img src="screenshots/1.jpg" alt="Screenshot 1" width="800"/><br><br>
+  <img src="screenshots/2.jpg" alt="Screenshot 2" width="800"/><br><br>
+  <img src="screenshots/3.jpg" alt="Screenshot 3" width="800"/><br><br>
+  <img src="screenshots/4.jpg" alt="Screenshot 4" width="800"/><br><br>
+  <img src="screenshots/5.jpg" alt="Screenshot 5" width="800"/>
+</p>
 
-
-
+---
