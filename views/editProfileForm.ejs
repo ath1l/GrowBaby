@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Baby Profile</title>
+</head>
+<body>
+    <h1>Edit Baby Profile</h1>
+    <form action="/profile/edit" method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" value="<%= baby.name %>" required><br>
+
+        <label>Date of Birth:</label>
+        <input type="date" name="dob" value="<%= baby.dob.toISOString().split('T')[0] %>" required><br>
+
+        <label>Gender:</label>
+        <select name="gender" required>
+            <option value="Male" <%= baby.gender === 'Male' ? 'selected' : '' %>>Male</option>
+            <option value="Female" <%= baby.gender === 'Female' ? 'selected' : '' %>>Female</option>
+        </select><br>
+
+        <button type="submit">Update Profile</button>
+    </form>
+</body>
+</html>
