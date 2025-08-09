@@ -294,7 +294,7 @@
 
         <div class="chat-box" id="chat-box">
             <% if (messages.length > 0) { %>
-                <% messages.slice().reverse().forEach(msg => { %>
+                <% messages.slice().forEach(msg => { %>
                     <div class="message user-msg"><%= msg.user %></div>
                     <div class="message bot-msg"><%= msg.bot %></div>
                 <% }) %>
