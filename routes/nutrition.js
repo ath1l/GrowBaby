@@ -39,7 +39,7 @@ router.get('/nutrition/summary', async (req, res) => {
     try {
         const baby = await Baby.findOne();
         if (!baby) {
-            return res.render('nutrition-summary', { summary: [], chartData: [] });
+            return res.render('nutrition-summary', { summary: [], chartData: [], aiSummary: "" });
         }
 
         // Calculate date 7 days ago
@@ -91,13 +91,33 @@ router.get('/nutrition/summary', async (req, res) => {
             fats: sortedSummary.map(s => s.fats)
         };
 
-        res.render('nutrition-summary', { summary: sortedSummary, chartData });
+        // --- Generate AI summary using Gemini ---
+        let aiSummary = "";
+        try {
+            const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+            const prompt = ` You are a nutrition report summerizer in a web app.
+                Here is the baby's nutrition intake for the last 7 days:
+                ${JSON.stringify(sortedSummary, null, 2)}
+                
+                Please provide a really short, clear summary highlighting trends, highs, lows, 
+                and any observations about calorie, protein, carbohydrate, and fat intake.
+                Don't include bold ,headings, etc.. .
+            `;
+            const result = await model.generateContent(prompt);
+            aiSummary = result.response.text();
+        } catch (aiErr) {
+            console.error("Gemini API Error:", aiErr);
+            aiSummary = "AI summary could not be generated.";
+        }
+
+        res.render('nutrition-summary', { summary: sortedSummary, chartData, aiSummary });
 
     } catch (err) {
         console.error("Nutrition Summary Error:", err);
-        res.render('nutrition-summary', { summary: [], chartData: [] });
+        res.render('nutrition-summary', { summary: [], chartData: [], aiSummary: "" });
     }
 });
+
 
 router.post('/nutrition', async (req, res) => {
     const { food, quantity, dateEaten } = req.body;

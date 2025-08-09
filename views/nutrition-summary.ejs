@@ -44,6 +44,15 @@
         canvas {
             margin-top: 2em;
         }
+
+        .ai-summary {
+            background: #f0f8ff;
+            padding: 1em;
+            border-left: 5px solid #4a90e2;
+            border-radius: 5px;
+            margin-top: 1em;
+            white-space: pre-line;
+        }
     </style>
 </head>
 
@@ -51,44 +60,52 @@
     <div class="container">
         <h1>Weekly Nutrition Summary</h1>
 
-        <% if (summary.length===0) { %>
-            <p>No logs available for the last 7 days.</p>
-            <% } else { %>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Calories</th>
-                            <th>Protein (g)</th>
-                            <th>Carbs (g)</th>
-                            <th>Fats (g)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% summary.forEach(day=> { %>
-                            <tr>
-                                <td>
-                                    <%= day.date %>
-                                </td>
-                                <td>
-                                    <%= day.calories.toFixed(2) %>
-                                </td>
-                                <td>
-                                    <%= day.protein.toFixed(2) %>
-                                </td>
-                                <td>
-                                    <%= day.carbs.toFixed(2) %>
-                                </td>
-                                <td>
-                                    <%= day.fats.toFixed(2) %>
-                                </td>
-                            </tr>
-                            <% }) %>
-                    </tbody>
-                </table>
+        <% if (aiSummary && aiSummary.trim().length> 0) { %>
+            <div class="ai-summary">
+                <p>
+                    <%= aiSummary %>
+                </p>
+            </div>
+            <% } %>
 
-                <canvas id="nutritionChart"></canvas>
-                <% } %>
+                <% if (summary.length===0) { %>
+                    <p>No logs available for the last 7 days.</p>
+                    <% } else { %>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Calories</th>
+                                    <th>Protein (g)</th>
+                                    <th>Carbs (g)</th>
+                                    <th>Fats (g)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% summary.forEach(day=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= day.date %>
+                                        </td>
+                                        <td>
+                                            <%= day.calories.toFixed(2) %>
+                                        </td>
+                                        <td>
+                                            <%= day.protein.toFixed(2) %>
+                                        </td>
+                                        <td>
+                                            <%= day.carbs.toFixed(2) %>
+                                        </td>
+                                        <td>
+                                            <%= day.fats.toFixed(2) %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+
+                        <canvas id="nutritionChart"></canvas>
+                        <% } %>
     </div>
 
     <script>
