@@ -1,9 +1,75 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Baby Nutrition Analysis</title>
     <link rel="stylesheet" href="/css/nutrition.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #f4f4f4;
+        }
+
+        .result,
+        .log-section {
+            margin-top: 2em;
+            padding: 1em;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-form {
+            background: #f9f9f9;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .food-form label {
+            display: block;
+            margin-top: 0.5em;
+        }
+
+        .food-form input,
+        .food-form button {
+            padding: 0.5em;
+            margin-top: 0.3em;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .food-form button {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .food-form button:hover {
+            background: #45a049;
+        }
+
+        h2,
+        h3 {
+            margin-top: 0;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Nutrition Analysis for Your Baby</h1>
@@ -11,6 +77,13 @@
         <form action="/nutrition" method="POST" class="food-form">
             <label for="food">Enter the food given to your baby:</label>
             <input type="text" id="food" name="food" placeholder="e.g., mashed banana" required>
+
+            <label for="quantity">Quantity:</label>
+            <input type="text" id="quantity" name="quantity" placeholder="e.g., 100g" required>
+
+            <label for="dateEaten">Date Eaten:</label>
+            <input type="datetime-local" id="dateEaten" name="dateEaten">
+
             <button type="submit">Analyze</button>
         </form>
 
@@ -18,17 +91,39 @@
             <div class="result">
                 <h2>Nutrition Breakdown</h2>
                 <table>
-                    <tr><th>Calories</th><td><%= result.calories %></td></tr>
-                    <tr><th>Protein</th><td><%= result.protein %></td></tr>
-                    <tr><th>Carbohydrates</th><td><%= result.carbohydrates %></td></tr>
-                    <tr><th>Fats</th><td><%= result.fats %></td></tr>
+                    <tr>
+                        <th>Calories</th>
+                        <td>
+                            <%= result.calories %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Protein</th>
+                        <td>
+                            <%= result.protein %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Carbohydrates</th>
+                        <td>
+                            <%= result.carbohydrates %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Fats</th>
+                        <td>
+                            <%= result.fats %>
+                        </td>
+                    </tr>
                     <tr>
                         <th>Vitamins</th>
                         <td>
                             <ul>
-                                <% result.vitamins.forEach(v => { %>
-                                    <li><%= v %></li>
-                                <% }) %>
+                                <% result.vitamins.forEach(v=> { %>
+                                    <li>
+                                        <%= v %>
+                                    </li>
+                                    <% }) %>
                             </ul>
                         </td>
                     </tr>
@@ -36,9 +131,11 @@
                         <th>Minerals</th>
                         <td>
                             <ul>
-                                <% result.minerals.forEach(m => { %>
-                                    <li><%= m %></li>
-                                <% }) %>
+                                <% result.minerals.forEach(m=> { %>
+                                    <li>
+                                        <%= m %>
+                                    </li>
+                                    <% }) %>
                             </ul>
                         </td>
                     </tr>
@@ -46,12 +143,88 @@
 
                 <div class="advice">
                     <h3>Parenting Advice</h3>
-                    <p><%= result.advice %></p>
+                    <p>
+                        <%= result.advice %>
+                    </p>
                 </div>
             </div>
-        <% } else if (result && result.error) { %>
-            <p class="error"><%= result.error %></p>
-        <% } %>
+            <% } else if (result && result.error) { %>
+                <p class="error">
+                    <%= result.error %>
+                </p>
+                <% } %>
+
+                    <% if (logs && logs.length> 0) { %>
+                        <div class="log-section">
+                            <h2>Food Log</h2>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Food</th>
+                                        <th>Quantity</th>
+                                        <th>Calories</th>
+                                        <th>Protein</th>
+                                        <th>Carbs</th>
+                                        <th>Fats</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% logs.forEach(l=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= new Date(l.dateEaten).toLocaleString() %>
+                                            </td>
+                                            <td>
+                                                <%= l.food %>
+                                            </td>
+                                            <td>
+                                                <%= l.quantity %>
+                                            </td>
+                                            <td>
+                                                <%= l.nutrition.calories %>
+                                            </td>
+                                            <td>
+                                                <%= l.nutrition.protein %>
+                                            </td>
+                                            <td>
+                                                <%= l.nutrition.carbohydrates %>
+                                            </td>
+                                            <td>
+                                                <%= l.nutrition.fats %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                            <div style="margin-top: 20px; text-align: center;">
+                                <a href="/nutrition/summary" style="
+                                        display: inline-block;
+                                        padding: 12px 20px;
+                                        background: linear-gradient(90deg, #4CAF50, #45a049);
+                                        color: white;
+                                        text-decoration: none;
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                        border-radius: 8px;
+                                        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                                        transition: all 0.3s ease;
+                                   "
+                                    onmouseover="this.style.background='linear-gradient(90deg,#45a049,#4CAF50)';this.style.transform='scale(1.05)';"
+                                    onmouseout="this.style.background='linear-gradient(90deg,#4CAF50,#45a049)';this.style.transform='scale(1)';">
+                                    📊 View Weekly Nutrition Summary
+                                </a>
+                            </div>
+                        </div>
+                        <% } %>
     </div>
+
+    <script>
+        // Pre-fill current datetime
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        document.getElementById('dateEaten').value = now.toISOString().slice(0, 16);
+    </script>
 </body>
+
 </html>
