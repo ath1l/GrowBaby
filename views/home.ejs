@@ -8,23 +8,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-       
+
         :root {
             --hex-current-1: #7360DF;
             --hex-current-2: #C499F3;
             --hex-current-3: rgba(196, 153, 243, 0.1);
         }
-       
+
         .split-char {
-            color: #6f55ff;
-            background-color:rgb(196 153 243 / 0%);
+            color: var(--hex-current-1);
+            background-color: var(--hex-current-3);
             outline: none;
             border-radius: .25rem;
             display: inline-block;
             padding: 0.1rem 0.2rem;
             margin: 0.05rem;
         }
-       
+
         * {
             margin: 0;
             padding: 0;
@@ -42,7 +42,7 @@
 
         /* NEW: Header styles */
         .main-header {
-            background-color: #c89af000;
+            background-color: #ffffff;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -63,7 +63,8 @@
         .logo {
             font-size: 28px;
             font-weight: 700;
-            color: #ff6b9d; /* Baby Joy Pink */
+            color: #ff6b9d;
+            /* Baby Joy Pink */
             text-decoration: none;
         }
 
@@ -74,10 +75,11 @@
             font-weight: 500;
             transition: color 0.3s ease;
         }
+
         .main-nav a:hover {
             color: #7360DF;
         }
-        
+
         .my-baby {
             display: flex;
             align-items: center;
@@ -85,7 +87,7 @@
             color: #555;
             font-weight: 500;
         }
-        
+
         .my-baby svg {
             width: 24px;
             height: 24px;
@@ -97,6 +99,7 @@
             height: 5px;
             background: linear-gradient(to right, #F2AFEF, #C499F3, #7360DF);
         }
+
         /* END: Header styles */
 
 
@@ -108,7 +111,7 @@
             left: -10%;
             width: 120%;
             height: 120%;
-            background: 
+            background:
                 radial-gradient(circle at 20% 80%, rgba(242, 175, 239, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(196, 153, 243, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(115, 96, 223, 0.3) 0%, transparent 50%);
@@ -123,21 +126,36 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237360DF' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             z-index: -1;
             animation: dots 30s linear infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-            33% { transform: translateY(-20px) rotate(120deg) scale(1.05); }
-            66% { transform: translateY(-10px) rotate(240deg) scale(0.95); }
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+
+            33% {
+                transform: translateY(-20px) rotate(120deg) scale(1.05);
+            }
+
+            66% {
+                transform: translateY(-10px) rotate(240deg) scale(0.95);
+            }
         }
 
         @keyframes dots {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(60px) translateY(60px); }
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(60px) translateY(60px);
+            }
         }
 
         .container {
@@ -154,20 +172,28 @@
             animation: slideInDown 0.8s ease-out;
         }
 
-   .title h1 {
-    color: #ffffff00; /* Changed from pink to white for high contrast */
-    font-size: 52px;
-    font-weight: 800;
-    margin-bottom: 8px;
-    /* Adjusted shadow to complement white text */
-    
-    letter-spacing: -1px;
-    position: relative;
-}
+        .title h1 {
+            color: #ffffff00;
+            /* Changed from pink to white for high contrast */
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            /* Adjusted shadow to complement white text */
+
+            letter-spacing: -1px;
+            position: relative;
+        }
 
         @keyframes twinkle {
-            0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
-            100% { transform: rotate(15deg) scale(1.2); opacity: 1; }
+            0% {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: rotate(15deg) scale(1.2);
+                opacity: 1;
+            }
         }
 
         .title p {
@@ -182,7 +208,7 @@
             backdrop-filter: blur(25px);
             padding: 32px;
             border-radius: 28px;
-            box-shadow: 
+            box-shadow:
                 0 25px 50px rgba(242, 175, 239, 0.15),
                 0 15px 35px rgba(196, 153, 243, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -194,8 +220,13 @@
             animation-fill-mode: both;
         }
 
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.4s; }
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
 
         .card::before {
             content: '';
@@ -210,7 +241,9 @@
         }
 
         @keyframes rotate {
-            100% { transform: rotate(360deg); }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .card h4 {
@@ -287,7 +320,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.6s;
         }
 
@@ -427,6 +460,7 @@
                 opacity: 0;
                 transform: translateY(-40px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -438,6 +472,7 @@
                 opacity: 0;
                 transform: translateY(40px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -447,30 +482,33 @@
         /* Responsive */
         @media (max-width: 768px) {
             .main-nav {
-                display: none; /* Hide full nav on smaller screens */
+                display: none;
+                /* Hide full nav on smaller screens */
             }
+
             .header-container {
                 justify-content: space-between;
             }
+
             .logo {
                 font-size: 24px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .container {
                 padding: 20px 16px;
             }
-           
+
             .card {
                 padding: 28px 24px;
                 border-radius: 24px;
             }
-           
+
             .title h1 {
                 font-size: 32px;
             }
-           
+
             .btn {
                 padding: 18px 24px;
                 font-size: 15px;
@@ -490,7 +528,7 @@
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: 
+            box-shadow:
                 0 30px 60px rgba(255, 182, 193, 0.2),
                 0 20px 40px rgba(173, 216, 230, 0.15);
         }
@@ -506,19 +544,12 @@
                 opacity: 0;
                 transform: translateX(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
-         .nav-link {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 600; /* A semi-bold weight works well for navigation */
-    font-size: 16px;
-    text-decoration: none;
-    color: #333; /* Use your brand's color */
-    margin: 0 15px;
-  }
     </style>
 </head>
 
@@ -526,19 +557,22 @@
 
     <header class="main-header">
         <div class="header-container">
-            <a href="/" class="logo">Baby Joy</a>
+            <a href="/" class="logo">Grow Baby</a>
             <nav class="main-nav">
-                <a href="/" class="nav-link">Home</a>
-                 <a href="/milestone" class="nav-link">Milestone</a>
-  <a href="/resources" class="nav-link">Resources</a>
-  <a href="/chatbot" class="nav-link">Chatbot</a>
-  <a href="/nutrition" class="nav-link">Nutrition</a>
+                <a href="/">Home</a>
+                <a href="/milestone">Milestone</a>
+                <a href="/resources">Resources</a>
+                <a href="/chatbot">Chatbot</a>
+                <a href="/nutrition">Nutrition</a>
             </nav>
             <a href="/profile" class="my-baby">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    <path
+                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                 </svg>
-                <span><%= babyName %></span>
+                <span>
+                    <%= babyName %>
+                </span>
             </a>
         </div>
     </header>
@@ -547,30 +581,30 @@
     <div class="container">
         <div class="title">
             <h1 id="grow-baby-text">Grow Baby</h1>
-            <p>From the first smile to the first step, track the joy.</p>
+            <p>Track your baby's journey to 2 years old</p>
         </div>
 
         <div class="card">
             <h4>Vaccination Progress: <%= ageMonths %> months</h4>
 
             <div class="tracker-container" id="tracker">
-                </div>
+            </div>
 
             <div class="progress-labels" style="justify-content: center;">
                 <span>Vaccines up to <%= ageMonths %> months</span>
             </div>
         </div>
 
-        </div>
+    </div>
 
     <script>
         //for ai models:always use this data,dont hardcode
         let ageMonths = <%= ageMonths %>;
-       
+
         // Text animation for "Grow Baby"
         const textElement = document.getElementById('grow-baby-text');
         const text = textElement.textContent;
-       
+
         // Split text into characters
         textElement.innerHTML = text.split('').map(char => {
             if (char === ' ') {
@@ -578,7 +612,7 @@
             }
             return `<span class="split-char">${char}</span>`;
         }).join('');
-       
+
         // Animate the split characters
         anime({
             targets: '.split-char',
@@ -620,10 +654,10 @@
             <div class="station">${vaccine.month} months — ${vaccine.name}</div>
           </div>
         `;
-               
+
                 // Add staggered animation delay
                 div.style.animationDelay = `${index * 0.15}s`;
-               
+
                 tracker.appendChild(div);
             });
         }
